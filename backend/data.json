@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "vorname": "Hans",
+    "nachname": "Müller",
+    "email": "hans@mueller.de",
+    "nachricht": "blablabla",
+    "bild": ""
+  },
+  {
+    "id": 2,
+    "vorname": "Max",
+    "nachname": "Mustermann",
+    "email": "max@mustermann.de",
+    "nachricht": "hohoho",
+    "bild": ""
+  },
+  {
+    "id": "2024-01-18T22:28:05.071Z",
+    "vorname": "metin",
+    "nachname": "karakaya",
+    "email": "karakaya@test.de",
+    "nachricht": "hi",
+    "bild": ""
+  }
+]
