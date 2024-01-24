@@ -14,18 +14,15 @@ const GuestbookContent = () => {
         })
     },[])
 
-    console.log(guestbookContent);
-
     return ( 
         <section className="font-mono w-3/5">
             {guestbookContent?.map((item, index) => {
                 return <div className="text-xl  bg-slate-700 p-2 my-2 flex" key={index}>
-                            <div className="">
-                                <img className="object-contain p-1" src={item.bild !== "" ? `./../backend/uploads/${item.bild}` : "/userImage.png"} 
+                            <div className="border-solid border-r border-white p-4 self-center">
+                                <img className="object-contain p-1 w-36" src={item.bild !== "" ? `http://localhost:3001/imageUploads/${item.bild}` : "/userImage.png"} 
                                 alt="profilbild" />
-                                {/* <img src={`http://localhost:3001/api/guestbook/${item.bild}`} /> */}
                             </div>
-                            <div className="grid grid-cols-2 p-1 grow">
+                            <div className="grid grid-cols-2 p-4 grow">
                                 <p className="text-xl font-mono text-white font-bold">{item.nachname.toString()},</p>
                                 <p className="text-xl font-mono text-white italic text-right">{item.email.toString()}</p>
                                 <p className="text-xl font-mono text-white font-bold">{item.vorname.toString()}:</p>
@@ -35,6 +32,10 @@ const GuestbookContent = () => {
                                 <p className="text-xl font-mono text-white">{item.nachricht.toString()}</p>
                                 <br />
                                 <br />
+                            </div>
+                            <div className="border-solid border-l border-white p-4 flex flex-col gap-20 self-center w-16">
+                                <img src="./src/assets/images/edit.png" alt="edit button" />
+                                <img src="./src/assets/images/delete.png" alt="delete button" />
                             </div>
                         </div>
             })}

@@ -7,10 +7,9 @@ const GuestbookEntry = () => {
     nachname: "",
     email: "",
     nachricht: "",
-    bild: ""
   });
 
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState(null);
 
   const handleChange = (e) => {
     setFormInput({ ...formInput, [e.target.name]: e.target.value });
@@ -20,90 +19,37 @@ const GuestbookEntry = () => {
     setFile(e.target.files[0]);
   }
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData();
-  //   formData.append("file", file);
-
-  //   fetch("http://localhost:3001/api/upload", {
-  //     method: "POST",
-  //     body: formData,
-  //   })
-  //   .then((response) => {
-  //     if (response.ok) {
-  //       console.log("File upload erfolgreich");
-  //       if (file !== ""){
-  //         setFormInput((prevState) => ({ ...prevState, bild: file.name }))
-  //       }
-  //     } else {
-  //       console.log("File upload fehlgeschlagen");
-  //     }
-  //   })
-  //   .catch((error) => {
-  //     console.log("Error: ", error);
-  //   })
-  //   fetch("http://localhost:3001/api/guestbook/entry", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({ guestbookEntry: formInput }),
-  //   })
-  //   .then((response) => {
-  //     if (response.ok) {
-  //       console.log("Eintrag übertragen");
-  //     } else {
-  //       console.log("Übertragungsfehler");
-  //     }
-  //   })
-  //   .catch((error) => {
-  //     console.log("Error:", error);
-  //   })
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("file", file);
-
-    const response = await fetch("http://localhost:3001/api/upload", {
-      method: "POST",
-      body: formData,
-    })
+    
     try {
-      if (response.ok) {
-        await fetch("http://localhost:3001/api/guestbook/entry", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ guestbookEntry: formInput }),
-        })
-        .then((response) => {
-          if (response.ok) {
-            console.log("Eintrag übertragen");
-          } else {
-            console.log("Übertragungsfehler");
-          }
-        })
-        .catch((error) => {
-          console.log("Error:", error);
-        })
-        console.log("File upload erfolgreich");
-        if (file !== ""){
-          setFormInput((prevState) => ({ ...prevState, bild: file.name }))
-        }
-      } else {
-        console.log("File upload fehlgeschlagen");
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await fetch("http://localhost:3001/api/upload", {
+        method: "POST",
+        body: formData,
+      })
+      if (!response.ok) {
+        return console.log("File upload fehlgeschlagen")
+      } 
+      console.log("File upload erfolgreich");
+
+      const responseEntry = await fetch("http://localhost:3001/api/guestbook/entry", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ guestbookEntry: {...formInput, bild: file ? file.name : ""} }),
+      })
+      if (!responseEntry.ok) {
+        return console.log("Übertragungsfehler");
       }
+      console.log("Daten erfolgreich übertragen");
     } catch(err) {
       console.log("Error: ", err);
     }
-
-
   };
-
-  console.log(formInput);
 
   return (
     <section className="w-full">

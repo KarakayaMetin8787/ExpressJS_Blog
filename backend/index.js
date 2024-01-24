@@ -15,6 +15,8 @@ app.use((req, _, next) => {
     next();
 });
 
+app.use("/imageUploads", express.static("uploads")) //http://localhost:3001/me.png aufrufe, dann würde express static nach dem pfad schauen und wenn vorhanden returnen
+
 const storage = multer.diskStorage({
     destination: "uploads",
     filename: (_, file, cb) => {
@@ -83,6 +85,30 @@ app.post("/api/guestbook/entry", [
         res.status(500).json({ success: false, error: "failed to add new guestbook entry" });
     }
 });
+
+app.patch("/api/guestbook/entry/:id", (req, res) => {
+    const id = req.params.id;
+    readJsonFile("./data.json")
+    .then((entries) => {
+        const updateEntry = entries.map((entry) => {
+            if (entry.id.toString() === id) {
+                return {...entry, nachricht: req.body.nachricht}
+            } else {
+                return entry
+            }
+        })
+        return updateEntry
+    })
+    .then((newEntryArray) => writeJsonFile("./data.json", newEntryArray))
+    .then((newEntryArray) => {
+        res.status(200).json({ success: true, result: newEntryArray })
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).json({ success: false, error: "failed to update entry"})
+    })
+})
+
 
 app.use((_, res) => {
     res.status(404).json({ success: false, error: "route not found" });
