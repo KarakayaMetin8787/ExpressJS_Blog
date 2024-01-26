@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import 'tailwindcss/tailwind.css';
-import backendURL from "./../api/api.js";
+import { backendURL } from "./../api/api";
 
 const GuestbookContent = () => {
 
