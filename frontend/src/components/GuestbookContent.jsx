@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import 'tailwindcss/tailwind.css';
+import backendURL from "./../api/api.js";
 
 const GuestbookContent = () => {
 
     const [guestbookContent, setGuestbookContent] = useState([]);
     
     useEffect(() => {
-        fetch("http://localhost:3001/api/guestbook")
+        fetch(`${backendURL}/api/guestbook`)
         .then((res) => res.json())
         .then(({ success, result, error }) => {
             if ( !success ) throw error

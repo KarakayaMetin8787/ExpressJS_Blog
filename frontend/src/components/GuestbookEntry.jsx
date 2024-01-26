@@ -26,7 +26,7 @@ const GuestbookEntry = () => {
       const formData = new FormData();
       formData.append("file", file);
 
-      const response = await fetch("http://localhost:3001/api/upload", {
+      const response = await fetch(`${backendURL}/api/upload`, {
         method: "POST",
         body: formData,
       })
@@ -35,7 +35,7 @@ const GuestbookEntry = () => {
       } 
       console.log("File upload erfolgreich");
 
-      const responseEntry = await fetch("http://localhost:3001/api/guestbook/entry", {
+      const responseEntry = await fetch(`${backendURL}/api/guestbook/entry`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
