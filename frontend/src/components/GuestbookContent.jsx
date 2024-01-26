@@ -22,7 +22,7 @@ const GuestbookContent = () => {
             {guestbookContent?.map((item, index) => {
                 return <div className="text-xl  bg-slate-700 p-2 my-2 flex" key={index}>
                             <div className="border-solid border-r border-white p-4 self-center">
-                                <img className="object-contain p-1 w-36" src={item.bild !== "" ? `http://localhost:3001/imageUploads/${item.bild}` : "/userImage.png"} 
+                                <img className="object-contain p-1 w-36" src={item.bild !== "" ? `${backendURL}/imageUploads/${item.bild}` : "/userImage.png"} 
                                 alt="profilbild" />
                             </div>
                             <div className="grid grid-cols-2 p-4 grow">
