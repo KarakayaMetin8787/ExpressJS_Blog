@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import 'tailwindcss/tailwind.css';
 import { backendURL } from "./../api/api";
+import deletePic from "./../assets/images/delete.png";
+import editPic from "./../assets/images/edit.png";
 
 const GuestbookContent = () => {
 
@@ -35,8 +37,8 @@ const GuestbookContent = () => {
                                 <br />
                             </div>
                             <div className="border-solid border-l border-white p-4 flex flex-col gap-20 self-center w-16">
-                                <img src="./src/assets/images/edit.png" alt="edit button" />
-                                <img src="./src/assets/images/delete.png" alt="delete button" />
+                                <img src={editPic} alt="edit button" />
+                                <img src={deletePic} alt="delete button" />
                             </div>
                         </div>
             })}
