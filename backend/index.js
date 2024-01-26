@@ -28,6 +28,8 @@ const upload = multer({ storage: storage })
 
 app.use(express.json());
 
+app.use(express.static());
+
 app.get("/api/guestbook", async (_, res) => {
     try {
         const data = await fs.readFile("./data.json");
@@ -49,8 +51,6 @@ app.post("/api/guestbook/entry", [
     body("guestbookEntry.email").isEmail().withMessage("Email ist falsch definiert"),
     body("guestbookEntry.nachricht").trim().isLength({ min: 1, max: 500 }).withMessage("Nachricht ist falsch definiert")
 ], async (req, res) => {
-    console.log(req.file);
-    console.log(req.body);
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -71,10 +71,7 @@ app.post("/api/guestbook/entry", [
             email: trimAllWhitespace(newGuestbookEntry.email),
             nachricht: trimAllWhitespace(newGuestbookEntry.nachricht),
             bild: newGuestbookEntry.bild
-        };
-        console.log("zeile 71", newGuestbookEntry);
-        console.log("zeile 72", newEntryItem);
-        
+        };    
         const updatedGuestbook = [...entries, newEntryItem];
 
         await fs.writeFile("./data.json", JSON.stringify(updatedGuestbook, null, 2));
@@ -86,9 +83,9 @@ app.post("/api/guestbook/entry", [
     }
 });
 
-app.patch("/api/guestbook/entry/:id", (req, res) => {
+app.patch("/api/guestbook/entry/:id", async (req, res) => {
     const id = req.params.id;
-    readJsonFile("./data.json")
+    await readJsonFile("./data.json")
     .then((entries) => {
         const updateEntry = entries.map((entry) => {
             if (entry.id.toString() === id) {
