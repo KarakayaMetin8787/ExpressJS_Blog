@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import './../../node_modules/tailwindcss/tailwind.css';
+import backendURL from "./../api/api.js";
+
 
 const GuestbookEntry = () => {
   const [formInput, setFormInput] = useState({
