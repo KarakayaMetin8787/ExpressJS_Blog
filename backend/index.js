@@ -3,6 +3,8 @@ const cors = require("cors");
 const fs = require("fs").promises;
 const { body, validationResult } = require("express-validator");
 const multer = require("multer");
+const { readJsonFile, writeJsonFile, removeFile } = require("./fsUtils");
+
 
 // const uploadMiddleware = multer({ dest: "./uploads" });
 
@@ -27,8 +29,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 app.use(express.json());
-
-app.use(express.static());
 
 app.get("/api/guestbook", async (_, res) => {
     try {
@@ -83,28 +83,36 @@ app.post("/api/guestbook/entry", [
     }
 });
 
-app.patch("/api/guestbook/entry/:id", async (req, res) => {
-    const id = req.params.id;
-    await readJsonFile("./data.json")
-    .then((entries) => {
-        const updateEntry = entries.map((entry) => {
-            if (entry.id.toString() === id) {
-                return {...entry, nachricht: req.body.nachricht}
-            } else {
-                return entry
-            }
+app.patch("/api/guestbook/entry/:id", (req, res) => {
+    const entryId = req.params.id;
+    const receivedNewMessage = req.body.nachricht;
+
+    readJsonFile("./data.json")
+        .then((entries) => {
+            const updatedEntry = entries.map((entry) => {
+                if (entry.id.toString() === entryId) {
+                    return { ...entry, nachricht: receivedNewMessage };
+                } else {
+                    return entry;
+                }
+            });
+            return updatedEntry;
         })
-        return updateEntry
-    })
-    .then((newEntryArray) => writeJsonFile("./data.json", newEntryArray))
-    .then((newEntryArray) => {
-        res.status(200).json({ success: true, result: newEntryArray })
-    })
-    .catch((err) => {
-        console.log(err);
-        res.status(500).json({ success: false, error: "failed to update entry"})
-    })
-})
+        .then((newEntryArray) => {
+            writeJsonFile("./data.json", newEntryArray)
+                .then(() => {
+                    res.status(200).json({ success: true, result: newEntryArray });
+                })
+                .catch((err) => {
+                    console.log(err);
+                    res.status(500).json({ success: false, error: "Failed to write to data.json" });
+                });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json({ success: false, error: "Failed to read data.json" });
+        });
+});
 
 
 app.use((_, res) => {

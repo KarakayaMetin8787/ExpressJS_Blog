@@ -4,7 +4,7 @@
     "vorname": "Hans",
     "nachname": "Müller",
     "email": "hans@mueller.de",
-    "nachricht": "blablabla",
+    "nachricht": "it woooorks!!!",
     "bild": ""
   },
   {
@@ -22,5 +22,13 @@
     "email": "karakaya@test.de",
     "nachricht": "hi",
     "bild": ""
+  },
+  {
+    "id": "2024-01-28T15:34:18.974Z",
+    "vorname": "emi",
+    "nachname": "dayi",
+    "email": "dayi@emi.de",
+    "nachricht": "änderung",
+    "bild": "me.png"
   }
 ]
