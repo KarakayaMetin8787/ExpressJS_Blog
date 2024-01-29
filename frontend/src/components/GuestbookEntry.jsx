@@ -19,11 +19,12 @@ const GuestbookEntry = () => {
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
+    document.getElementById("labelFileUpload").classList.add("bg-lime-600")
+    document.getElementById("labelFileUpload").classList.remove("bg-white")
+    document.getElementById("labelFileUpload").textContent = document.getElementById("file").value;
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    
     try {
       const formData = new FormData();
       formData.append("file", file);
@@ -58,7 +59,7 @@ const GuestbookEntry = () => {
       <form onSubmit={handleSubmit} className="flex flex-col items-center w-99 gap-4 py-8">
         <div className="flex gap-4 w-3/5 ">
         <input
-          className="border-solid	border-black border	p-2 w-1/2 bg-white"
+          className="p-2 w-1/2"
           type="text"
           placeholder="Vorname"
           name="vorname"
@@ -66,7 +67,7 @@ const GuestbookEntry = () => {
           onChange={handleChange}
         />
         <input
-          className="border-solid	border-black border	p-2 w-1/2 bg-white"
+          className="p-2 w-1/2"
           type="text"
           placeholder="Nachname"
           name="nachname"
@@ -75,7 +76,7 @@ const GuestbookEntry = () => {
         />
         </div>
         <input
-          className="border-solid	border-black border	p-2 w-3/5"
+          className="p-2 w-3/5"
           type="email"
           placeholder="Email"
           name="email"
@@ -83,7 +84,7 @@ const GuestbookEntry = () => {
           onChange={handleChange}
         />
         <textarea
-          className="border-solid	border-black border	p-2 w-3/5 h-24"
+          className=" p-2 w-3/5 h-24"
           type="text"
           placeholder="Nachricht"
           name="nachricht"
@@ -92,17 +93,19 @@ const GuestbookEntry = () => {
         />
         <div className="flex gap-4 w-3/5 ">
           <label 
+          id="labelFileUpload"
           htmlFor="file" 
-          className="border-solid border-black border p-2 w-1/2 bg-white cursor-pointer">Bild hochladen...
+          className="p-2 w-1/2 bg-white cursor-pointer">Bild hochladen...  (optional)
             <input 
             id="file"
             className="hidden" 
             type="file" 
+            accept=".jpg, .jpeg, .png"
             name="file" 
             onChange={handleFileChange}
             />
           </label>
-          <input type="submit" value="Posten" className="border-solid	border-black border	p-2 w-1/2 bg-white cursor-pointer" />
+          <input type="submit" value="Posten" className="active:bg-slate-600 p-2 w-1/2 bg-white cursor-pointer" />
         </div>
       </form>
     </section>

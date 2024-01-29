@@ -114,6 +114,29 @@ app.patch("/api/guestbook/entry/:id", (req, res) => {
         });
 });
 
+app.delete("/api/guestbook/entry/:id", (req, res) => {
+    const entryId = req.params.id
+    readJsonFile("./data.json")
+    .then((entries) => {
+        const identifiedEntry = entries.find((entry) => entry.id.toString() === entryId);
+        if (identifiedEntry && identifiedEntry.attachment) {
+            removeFile("./uploads/" + identifiedEntry.attachment).catch((err) => {
+                console.log(err);
+            })
+        }
+        const allOtherEntries = entries.filter((entry) => entry.id.toString() !== entryId)
+        return allOtherEntries
+    })
+    .then((newEntryArray) => writeJsonFile("./data.json", newEntryArray))
+    .then((newEntryArray) => {
+        res.status(200).json({ success: true, result: newEntryArray})
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(500).json({ success: false, error: "Failed to remove entry"})
+    })
+})
+
 
 app.use((_, res) => {
     res.status(404).json({ success: false, error: "route not found" });

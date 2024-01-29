@@ -1,34 +1,18 @@
 [
   {
-    "id": 1,
-    "vorname": "Hans",
-    "nachname": "Müller",
-    "email": "hans@mueller.de",
-    "nachricht": "it woooorks!!!",
+    "id": "2024-01-29T09:11:55.370Z",
+    "vorname": "Heinz",
+    "nachname": "Wurst",
+    "email": "wurst@curry.de",
+    "nachricht": "und jetzt?",
     "bild": ""
   },
   {
-    "id": 2,
-    "vorname": "Max",
-    "nachname": "Mustermann",
-    "email": "max@mustermann.de",
-    "nachricht": "hohoho",
+    "id": "2024-01-29T09:13:44.597Z",
+    "vorname": "Mama",
+    "nachname": "Mia",
+    "email": "here@go.again",
+    "nachricht": "test",
     "bild": ""
-  },
-  {
-    "id": "2024-01-18T22:28:05.071Z",
-    "vorname": "metin",
-    "nachname": "karakaya",
-    "email": "karakaya@test.de",
-    "nachricht": "hi",
-    "bild": ""
-  },
-  {
-    "id": "2024-01-28T15:34:18.974Z",
-    "vorname": "emi",
-    "nachname": "dayi",
-    "email": "dayi@emi.de",
-    "nachricht": "änderung",
-    "bild": "me.png"
   }
 ]
