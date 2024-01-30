@@ -10,7 +10,7 @@ Weitere geplante Schritte:
 
 - Backend GET, POST, PATCH, DELETE
 - File Upload mit multer
-- asynch & await
+- async & await
 - Umgang mit ExpressJS und NodeJS
 - Implementierung von Datenvalidierung im Backend mit Express Validator
 - Deployment von Front- und Backend auf Render.com
