@@ -25,6 +25,7 @@ const GuestbookEntry = () => {
   }
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       const formData = new FormData();
       formData.append("file", file);
@@ -52,6 +53,7 @@ const GuestbookEntry = () => {
     } catch(err) {
       console.log("Error: ", err);
     }
+    location.reload()
   };
 
   return (
@@ -100,7 +102,7 @@ const GuestbookEntry = () => {
             id="file"
             className="hidden" 
             type="file" 
-            accept=".jpg, .jpeg, .png"
+            // accept=".jpg, .jpeg, .png"
             name="file" 
             onChange={handleFileChange}
             />

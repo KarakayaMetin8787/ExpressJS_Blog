@@ -1,18 +1,18 @@
 [
   {
-    "id": "2024-01-29T09:11:55.370Z",
-    "vorname": "Heinz",
-    "nachname": "Wurst",
-    "email": "wurst@curry.de",
-    "nachricht": "und jetzt?",
-    "bild": ""
+    "id": "2024-01-29T20:51:28.065Z",
+    "vorname": "Metin",
+    "nachname": "Karakaya",
+    "email": "karakaya@metin.de",
+    "nachricht": "Ich lerne Backend bei SuperCode!",
+    "bild": "me.png"
   },
   {
-    "id": "2024-01-29T09:13:44.597Z",
-    "vorname": "Mama",
-    "nachname": "Mia",
-    "email": "here@go.again",
-    "nachricht": "test",
+    "id": "2024-01-29T20:52:25.297Z",
+    "vorname": "Max",
+    "nachname": "Mustermann",
+    "email": "mustermann@max.de",
+    "nachricht": "Dies ist ein Muster.",
     "bild": ""
   }
 ]

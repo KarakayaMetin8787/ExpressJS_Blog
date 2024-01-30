@@ -7,6 +7,7 @@ import editPic from "./../assets/images/edit.png";
 const GuestbookContent = () => {
 
     const [guestbookContent, setGuestbookContent] = useState([]);
+    const [editedText, setEditedText] = useState("");
 
     useEffect(() => {
         fetch(`${backendURL}/api/guestbook`)
@@ -17,31 +18,36 @@ const GuestbookContent = () => {
         })
     },[])
 
-    const sendEditedText = (item) => {
-        console.log(item.target.value);
-        fetch(`${backendURL}/api/guestbook/entry/${item.target.id}`, {
-            method: "PATCH", 
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ nachricht: `${item.target.value}`})
-        })
-        .then((res) => res.json())
-        .then(data => { console.log(data);
-        }) 
-        .catch(error => {
-            console.log("Error: ", error);
-        })
+    const setNewText = (item) => {
+        setEditedText(item.target.value)
+    }
+
+    const sendEditedText = async (item) => {
+        item.nachricht = editedText;
+        try {
+            await fetch(`${backendURL}/api/guestbook/entry/${item.id}`, {
+                method: "PATCH", 
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ nachricht: `${item.nachricht}`})
+            })
+            .then((res) => res.json())
+            .then(data => { console.log(data);
+            }) 
+        } catch (err) {
+            console.log("Error: ", err);
+        }
+        document.getElementById(`${item.id}`).classList.toggle("hidden")
+        document.getElementById(`backgroundFocusChange`).classList.toggle("hidden")
+        document.getElementById(`button${item.id}`).classList.toggle("hidden")
+        location.reload()
     }
 
     const changeEntryMessage = (item) => {
         document.getElementById(`${item.id}`).classList.toggle("hidden")
         document.getElementById(`backgroundFocusChange`).classList.toggle("hidden")
         document.getElementById(`button${item.id}`).classList.toggle("hidden")
-    }
-
-    const changeEntryMessageWithReload = (item) => {
-        location.reload()
     }
 
 const deleteConfirmWindow = (item) => {
@@ -77,8 +83,8 @@ const deleteConfirmWindow = (item) => {
                                 <p className="text-xl font-mono text-white font-bold">{item.vorname.toString()} {item.nachname.toString()} schreibt:</p>
                                 <p className="text-xl font-mono text-white italic text-right">{item.email.toString()}</p>
                                 <p className="text-xl font-mono text-white col-span-2 h-[110px] overflow-hidden overflow-ellipsis line-clamp-4">{item.nachricht.toString()}</p>
-                                <textarea id={item.id} onChange={(item) => sendEditedText(item)} type="text" placeholder={item.nachricht} className="top-[47px] left-4 bg-slate-700 absolute text-xl font-mono text-white w-[95%] h-[115px] hidden z-20"/>
-                                <button id={`button${item.id}`} className="w-60 h-16 bg-lime-900 text-white absolute top-[155px] right-6 hidden z-20 cursor-pointer active:bg-lime-950" onClick={() => changeEntryMessageWithReload(item)} >neue Nachricht übernehmen</button>
+                                <textarea id={item.id} onChange={(item) => setNewText(item)} type="text" placeholder={item.nachricht} className="top-[47px] left-4 bg-slate-700 absolute text-xl font-mono text-white w-[95%] h-[115px] hidden z-20"/>
+                                <button id={`button${item.id}`} className="w-60 h-16 bg-lime-900 text-white absolute top-[155px] right-6 hidden z-20 cursor-pointer active:bg-lime-950" onClick={() => sendEditedText(item)} >neue Nachricht übernehmen</button>
                             </div>
                             <div className="border-solid border-l border-white p-4 flex flex-col gap-20 self-center min-w-16 max-w-16 relative">
                                 <img className="cursor-pointer hover:scale-150 transition-all" onClick={() => changeEntryMessage(item)} src={editPic} alt="edit button" />
