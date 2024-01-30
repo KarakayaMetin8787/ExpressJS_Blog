@@ -9,8 +9,10 @@ Weitere geplante Schritte:
 ## Neu gelernt
 
 - Backend GET, POST, PATCH, DELETE
+- File Upload mit multer
 - asynch & await
 - Umgang mit ExpressJS und NodeJS
+- Implementierung von Datenvalidierung im Backend mit Express Validator
 - Deployment von Front- und Backend auf Render.com
 - Verschiedene Styles mit TailwindCSS
 
