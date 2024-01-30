@@ -1,11 +1,12 @@
 # Gästebuch mit Frontend und Backend
 
-Aus einer simplen kleinen Übung für Backend Routing habe ich mich entschlossen ein etwas größeres Gästebuch zu programmieren. Im Moment kann jeder Beiträge verfassen und bearbeiten. 
+Aus einer simplen kleinen Übung für Backend Routing habe ich mich entschlossen ein etwas größeres Gästebuch zu programmieren. Im Moment kann jeder Beiträge verfassen und bearbeiten.
 Weitere geplante Schritte:
+
 - Login programmieren mit Passkeys
 - Sortierfunktion für Beiträge
 
-## Neu gelernt
+## Neu gelernt und angewandt
 
 - Backend GET, POST, PATCH, DELETE
 - asynch & await
@@ -15,7 +16,7 @@ Weitere geplante Schritte:
 
 ## Tools
 
-[![My Skills](https://skillicons.dev/icons?i=js,react,vite,nodejs,epxress,html,css,tailwind,git,github,vscode)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=js,react,vite,nodejs,express,html,css,tailwind,git,github,vscode)](https://skillicons.dev)
 
 ## Screenshots
 
@@ -24,6 +25,8 @@ Weitere geplante Schritte:
 ![App Screenshot](./frontend/src/assets/images/screenshot2.png)
 
 ![App Screenshot](./frontend/src/assets/images/screenshot3.png)
+
+![App Screenshot](./frontend/src/assets/images/screenshot4.png)
 
 ## Demo
 
